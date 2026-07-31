@@ -1,6 +1,8 @@
 // ==========================================
-// KONFIGURASI LOKASI KANTOR (KEMENHAJ JEMBER)
+// KONEKSI DATABASE & KONFIGURASI LOKASI
 // ==========================================
+const URL_WEB_APP = "PASTE_URL_WEB_APP_LO_DISINI"; // <-- GANTI PAKE URL YANG LO SALIN TADI!
+
 const KANTOR_LAT = -8.1812; 
 const KANTOR_LON = 113.6826;
 const RADIUS_MAKSIMAL = 50; // Jarak maksimal dalam satuan meter
@@ -10,12 +12,10 @@ const html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 25
 html5QrcodeScanner.render(onScanSuccess);
 
 function onScanSuccess(decodedText, decodedResult) {
-    // Validasi isi teks QR Code
     if (decodedText.trim() === "KEMENHAJ-JEMBER") {
         html5QrcodeScanner.clear(); // Matikan kamera setelah QR cocok
         tampilkanStatus("QR Valid! Sedang memeriksa lokasi GPS Anda...", "sukses");
         
-        // Cek apakah HP mendukung GPS
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(prosesAbsen, onErrorGPS, { enableHighAccuracy: true });
         } else {
@@ -30,7 +30,6 @@ function prosesAbsen(position) {
     const userLat = position.coords.latitude;
     const userLon = position.coords.longitude;
     
-    // Hitung jarak antara pegawai dan kantor dengan rumus Haversine
     const jarak = hitungJarakMeter(userLat, userLon, KANTOR_LAT, KANTOR_LON);
     const nama = document.getElementById("namaPegawai").value.trim();
     
@@ -39,14 +38,41 @@ function prosesAbsen(position) {
         return;
     }
 
+    let statusAbsen = "";
     if (jarak <= RADIUS_MAKSIMAL) {
-        tampilkanStatus(`ABSEN BERHASIL! Anda berada di lokasi kantor (${Math.round(jarak)}m).`, "sukses");
-        // CATATAN: Di sini nanti bisa disambungkan ke API database eksternal
-        console.log(`Absen Sukses: ${nama}, Jarak: ${Math.round(jarak)}m`);
+        statusAbsen = "DI LOKASI KANTOR";
+        tampilkanStatus(`ABSEN BERHASIL! Anda berada di lokasi kantor (${Math.round(jarak)}m). Menyimpan data...`, "sukses");
     } else {
-        tampilkanStatus(`ABSEN GAGAL: Anda berada di luar radius kantor (${Math.round(jarak)}m)!`, "gagal");
-        console.log(`Absen Gagal: ${nama}, Jarak: ${Math.round(jarak)}m`);
+        statusAbsen = "DI LUAR KANTOR (GAGAL)";
+        tampilkanStatus(`ABSEN GAGAL: Anda berada di luar radius kantor (${Math.round(jarak)}m)! Menyimpan data...`, "gagal");
     }
+
+    // KIRIM DATA KE GOOGLE SHEETS
+    kirimKeGoogleSheets(nama, statusAbsen, Math.round(jarak));
+}
+
+function kirimKeGoogleSheets(namaPegawai, statusAbsen, jarakMeter) {
+    const dataKirim = {
+        nama: namaPegawai,
+        status: statusAbsen,
+        jarak: jarakMeter
+    };
+
+    fetch(URL_WEB_APP, {
+        method: "POST",
+        mode: "no-cors", // Mode aman untuk lintas domain Google
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dataKirim)
+    })
+    .then(() => {
+        tampilkanStatus(statusAbsen.includes("GAGAL") ? `Absen selesai dicatat: Anda Ditolak (Luar Radius)` : `Absen selesai dicatat: Sukses Masuk!`, statusAbsen.includes("GAGAL") ? "gagal" : "sukses");
+    })
+    .catch((error) => {
+        tampilkanStatus("Gagal mengirim data ke server database.", "gagal");
+        console.error(error);
+    });
 }
 
 function onErrorGPS(error) {
@@ -60,9 +86,8 @@ function tampilkanStatus(pesan, tipe) {
     statusDiv.className = tipe;
 }
 
-// Fungsi Matematika Haversine Formula untuk Hitung Jarak Koordinat
 function hitungJarakMeter(lat1, lon1, lat2, lon2) {
-    const R = 6371e3; // Radius bumi dalam meter
+    const R = 6371e3; 
     const phi1 = lat1 * Math.PI/180;
     const phi2 = lat2 * Math.PI/180;
     const deltaPhi = (lat2-lat1) * Math.PI/180;
