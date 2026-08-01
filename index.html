@@ -3,27 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absensi Outsourcing Kemenhaj Jember</title>
-    <!-- Library CSS untuk tampilan modern -->
-    <link rel="stylesheet" href="style.css">
+    <title>E-Absensi Outsourcing - Kemenhaj Jember</title>
+    <!-- Google Fonts untuk font modern mirip web antrian -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Library QR Code Scanner -->
     <script src="https://unpkg.com/html5-qrcode"></script>
+    
+    <style>
+        :root {
+            --primary-color: #0d233a; /* Navy khas Simantri */
+            --secondary-color: #1e88e5; /* Biru terang aksen */
+            --bg-color: #f4f7f9; /* Background abu-abu super soft */
+            --text-color: #333333;
+            --success-color: #2e7d32;
+            --fail-color: #c62828;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(13, 35, 58, 0.08);
+            overflow: hidden;
+            border-top: 6px solid var(--secondary-color);
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 25px 20px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 12px;
+            color: #b0bec5;
+        }
+
+        .content {
+            padding: 30px 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.15);
+        }
+
+        .scanner-section {
+            border: 2px dashed #cfd8dc;
+            border-radius: 12px;
+            padding: 15px;
+            background: #fafafa;
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        #reader {
+            width: 100%;
+            border: none !important;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Styling tombol bawaan library scanner agar satu tema */
+        #reader button {
+            background-color: var(--secondary-color) !important;
+            color: white !important;
+            border: none !important;
+            padding: 10px 20px !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            border-radius: 6px !important;
+            cursor: pointer !important;
+            transition: background 0.2s !important;
+            margin-top: 10px !important;
+        }
+
+        #reader button:hover {
+            background-color: #1565c0 !important;
+        }
+
+        /* Kotak Status Notifikasi Cantik */
+        #status {
+            display: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.4;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .sukses {
+            background-color: #e8f5e9;
+            color: var(--success-color);
+            border: 1px solid #a5d6a7;
+        }
+
+        .gagal {
+            background-color: #ffebee;
+            color: var(--fail-color);
+            border: 1px solid #ef9a9a;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 11px;
+            color: #90a4ae;
+            background: #fafafa;
+            border-top: 1px solid #edf1f4;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Absensi Outsourcing</h2>
-    <p>Silakan masukkan nama dan scan QR Code di kantor</p>
-    
-    <input type="text" id="namaPegawai" placeholder="Masukkan Nama Lengkap">
-    
-    <!-- Wadah Kamera Scanner -->
-    <div id="reader"></div>
-    
-    <div id="status"></div>
-</div>
+    <div class="container">
+        <!-- Bagian Atas / Kop Aplikasi -->
+        <div class="header">
+            <h1>E-ABSENSI OUTSOURCING</h1>
+            <p>Kemenhaj Kabupaten Jember</p>
+        </div>
 
-<!-- Menghubungkan ke logika JavaScript -->
-<script src="script.js"></script>
+        <!-- Bagian Input & Kamera -->
+        <div class="content">
+            <div class="form-group">
+                <label for="namaPegawai">Nama Lengkap Pegawai</label>
+                <input type="text" id="namaPegawai" placeholder="Masukkan nama Anda sesuai SIM..." autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label>Scan QR Code Resmi Kantor</label>
+                <div class="scanner-section">
+                    <div id="reader"></div>
+                </div>
+            </div>
+
+            <!-- Tempat memunculkan notifikasi -->
+            <div id="status"></div>
+        </div>
+
+        <!-- Bagian Bawah -->
+        <div class="footer">
+            &copy; 2026 Kemenhaj Jember Ekosistem terintegrasi
+        </div>
+    </div>
+
+    <!-- Hubungkan ke script logika kita -->
+    <script src="script.js"></script>
 </body>
 </html>
