@@ -1,7 +1,7 @@
 // ==========================================
 // KONEKSI DATABASE & KONFIGURASI LOKASI
 // ==========================================
-const URL_WEB_APP = "PASTE_URL_WEB_APP_LO_DISINI"; // <-- GANTI PAKE URL YANG LO SALIN TADI!
+const URL_WEB_APP = "https://script.google.com/macros/s/AKfycby2uoA04qwcy254JqtXuKcJkIRTH2TTyXLPSOt9UU17HgFs7BOXau370A98pDRpKc8L/exec"; // <-- GANTI PAKE URL YANG LO SALIN TADI!
 
 const KANTOR_LAT = -8.1812; 
 const KANTOR_LON = 113.6826;
