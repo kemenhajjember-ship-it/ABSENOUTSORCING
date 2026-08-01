@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Absensi Outsourcing - Kemenhaj Jember</title>
-    <!-- Google Fonts untuk font modern mirip web antrian -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts untuk font resmi Simantri (Cinzel dan Montserrat) -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Library QR Code Scanner -->
     <script src="https://unpkg.com/html5-qrcode"></script>
     
@@ -19,11 +19,12 @@
             --fail-color: #b71c1c;
         }
 
-        * {
+       * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
+            /* Font dasar web otomatis berubah jadi Montserrat yang bersih */
+            font-family: 'Montserrat', sans-serif;
         }
 
         body {
@@ -56,18 +57,22 @@
         }
 
         .header h1 {
-            font-size: 20px;
+            /* Font judul berubah jadi Cinzel yang ada kaki klasiknya */
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             color: #ffffff;
             margin-bottom: 5px;
         }
 
         .header p {
-            font-size: 12px;
-            color: #d4a342; /* Subtitle warna gold */
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            font-size: 11px;
+            color: #d4a342;
+            font-weight: 600;
+            /* Mengatur jarak antar huruf agar renggang elegan mirip web temen lo */
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .content {
@@ -81,12 +86,13 @@
 
         .form-group label {
             display: block;
-            font-size: 12px;
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
             font-weight: 700;
             color: var(--primary-color);
             margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
         .form-group input {
