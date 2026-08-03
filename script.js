@@ -3,11 +3,12 @@
 // ==========================================
 const URL_WEB_APP = "https://script.google.com/macros/s/AKfycby2uoA04qwcy254JqtXuKcJkIRTH2TTyXLPSOt9UU17HgFs7BOXau370A98pDRpKc8L/exec"; // <-- GANTI PAKE URL YANG LO SALIN TADI!
 
-const KANTOR_LAT = -8.1812; 
-const KANTOR_LON = 113.6826;
-const RADIUS_MAKSIMAL = 50; // Jarak maksimal dalam satuan meter
-
+// Koordinat Target (Ganti dengan koordinat lo saat ini)
+const OFFICE_LAT = -8.169000; // Jalur Latitude lama lo
+const OFFICE_LON = 113.702000; // Jalur Longitude lama lo
+const MAX_DISTANCE = 50; // Jarak toleransi dalam meter (misal 50 meter)
 // Inisialisasi Kamera Scanner
+
 const html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
 html5QrcodeScanner.render(onScanSuccess);
 
