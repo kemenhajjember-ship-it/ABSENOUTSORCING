@@ -4,8 +4,8 @@
 const URL_WEB_APP = "https://script.google.com/macros/s/AKfycby2uoA04qwcy254JqtXuKcJkIRTH2TTyXLPSOt9UU17HgFs7BOXau370A98pDRpKc8L/exec"; // <-- GANTI PAKE URL YANG LO SALIN TADI!
 
 // Koordinat Target (Ganti dengan koordinat lo saat ini)
-const OFFICE_LAT = -8.169000; // Jalur Latitude lama lo
-const OFFICE_LON = 113.702000; // Jalur Longitude lama lo
+const OFFICE_LAT = -8.1772228; // Jalur Latitude lama lo
+const OFFICE_LON = 113.7004709; // Jalur Longitude lama lo
 const MAX_DISTANCE = 50; // Jarak toleransi dalam meter (misal 50 meter)
 // Inisialisasi Kamera Scanner
 
