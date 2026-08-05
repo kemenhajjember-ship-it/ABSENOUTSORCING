@@ -6,24 +6,21 @@ const URL_WEB_APP = "https://script.google.com/macros/s/AKfycby2uoA04qwcy254JqtX
 // Koordinat Target (Ganti dengan koordinat lo saat ini)
 const OFFICE_LAT = -8.1772228; // Jalur Latitude lama lo
 const OFFICE_LON = 113.7004709; // Jalur Longitude lama lo
-const MAX_DISTANCE = 100; // Jarak toleransi dalam meter (misal 50 meter)
+const MAX_DISTANCE = 500; // Jarak toleransi dalam meter (misal 50 meter)
 // Inisialisasi Kamera Scanner
 
 const html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
 html5QrcodeScanner.render(onScanSuccess);
 
 function onScanSuccess(decodedText, decodedResult) {
-    if (decodedText.trim() === "KEMENHAJ-JEMBER") {
-        html5QrcodeScanner.clear(); // Matikan kamera setelah QR cocok
-        tampilkanStatus("QR Valid! Sedang memeriksa lokasi GPS Anda...", "sukses");
+   if (decodedText.trim() === "KEMENHAJ-JEMBER") {
+        html5QrcodeScanner.clear();
+        tampilkanStatus("QR Valid! Mengirim data...", "sukses");
         
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(prosesAbsen, onErrorGPS, { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 });
-        } else {
-            tampilkanStatus("GPS tidak didukung di HP ini.", "gagal");
-        }
+        // Langsung bypass ke proses kirim data tanpa nunggu GPS
+        kirimDataKeGoogleSheets();
     } else {
-        tampilkanStatus("QR Code Salah! Bukan QR Resmi Kantor.", "gagal");
+        tampilkanStatus("QR Code Salah!", "gagal");
     }
 }
 
