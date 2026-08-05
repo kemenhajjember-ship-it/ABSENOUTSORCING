@@ -215,10 +215,43 @@
 
         <!-- Bagian Input & Kamera -->
         <div class="content">
-            <div class="form-group">
-                <label for="namaPegawai">Nama Lengkap Pegawai</label>
-                <input type="text" id="namaPegawai" placeholder="Masukkan nama Anda sesuai KTP..." autocomplete="off">
-            </div>
+            <!-- Dropdown Nama Pegawai Outsourcing -->
+<div class="form-group">
+  <label for="namaPegawai"><b>Nama Pegawai:</b></label>
+  <select id="namaPegawai" style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px;">
+    <option value="">-- Pilih Nama Anda --</option>
+    <!-- Ganti daftar di bawah dengan nama asli outsourcing nanti -->
+    <option value="Pegawai 1">Pegawai 1</option>
+    <option value="Pegawai 2">Pegawai 2</option>
+    <option value="Pegawai 3">Pegawai 3</option>
+  </select>
+</div>
+
+<!-- Opsi Opsi Jenis Absen -->
+<div class="form-group" style="margin-top: 15px;">
+  <label><b>Opsi Absen / Izin:</b></label><br>
+  <input type="radio" id="modeHadir" name="modeAbsen" value="HADIR" checked onclick="toggleAlasan()">
+  <label for="modeHadir">Hadir (Scan di Kantor)</label><br>
+  
+  <input type="radio" id="modeIzinTelat" name="modeAbsen" value="IZIN_TELAT" onclick="toggleAlasan()">
+  <label for="modeIzinTelat">Izin Datang Telat</label><br>
+  
+  <input type="radio" id="modeIzinAbsen" name="modeAbsen" value="IZIN_TIDAK_MASUK" onclick="toggleAlasan()">
+  <label for="modeIzinAbsen">Izin Tidak Masuk (Bisa dari Rumah)</label>
+</div>
+
+<!-- Kotak Alasan Opsional -->
+<div id="boxAlasan" style="display: none; margin-top: 10px;">
+  <label for="alasan"><b>Alasan Izin (Opsional):</b></label>
+  <textarea id="alasan" rows="2" style="width: 100%; padding: 8px;" placeholder="Tuliskan alasan jika ada..."></textarea>
+</div>
+
+<script>
+  function toggleAlasan() {
+    const isHadir = document.getElementById("modeHadir").checked;
+    document.getElementById("boxAlasan").style.display = isHadir ? "none" : "block";
+  }
+</script>
 
             <div class="form-group">
                 <label>Scan QR Code Resmi Kantor</label>
