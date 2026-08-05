@@ -1,7 +1,7 @@
 // ==========================================
 // KONEKSI DATABASE & KONFIGURASI LOKASI
 // ==========================================
-const URL_WEB_APP = "https://script.google.com/macros/s/AKfycby2uoA04qwcy254JqtXuKcJkIRTH2TTyXLPSOt9UU17HgFs7BOXau370A98pDRpKc8L/exec";
+const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbzh5S9FG7eHwc_-h2X8xEjx0v7QE9KHzyBKvrYb3QTMo9jRv1xOGL9kznEXc3rXqtIi/exec";
 
 // Inisialisasi Kamera Scanner
 const html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
