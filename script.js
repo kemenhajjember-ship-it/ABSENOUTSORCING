@@ -1,7 +1,7 @@
 // ==========================================
 // KONEKSI DATABASE & KONFIGURASI LOKASI
 // ==========================================
-const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbeh5S9FG7eHwc_-h2X8xEjx0v7QE9KHzyBKvrYb3QTMo9jRv1x0GL9kznEXc3RxQtIi/exec";
+const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbzh5S9FG7eHwc_-h2X8xEjx0v7QE9KHzyBKvrYb3QTMo9jRv1xOGL9kznEXc3rXqtIi/exec";
 
 // Koordinat Target Kantor
 const OFFICE_LAT = -8.1772228; 
