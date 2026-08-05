@@ -6,7 +6,7 @@ const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbeh5S9FG7eHwc_-h2X8
 // Koordinat Target Kantor
 const OFFICE_LAT = -8.1772228; 
 const OFFICE_LON = 113.7004709; 
-const MAX_DISTANCE = 100; // Toleransi radius dalam meter (misal 100 meter)
+const MAX_DISTANCE = 50; // Toleransi radius dalam meter (misal 100 meter)
 
 // Inisialisasi Kamera Scanner
 const html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
