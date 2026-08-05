@@ -18,7 +18,7 @@ function onScanSuccess(decodedText, decodedResult) {
         tampilkanStatus("QR Valid! Sedang memeriksa lokasi GPS Anda...", "sukses");
         
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(prosesAbsen, onErrorGPS, { enableHighAccuracy: true });
+            navigator.geolocation.getCurrentPosition(prosesAbsen, onErrorGPS, { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 });
         } else {
             tampilkanStatus("GPS tidak didukung di HP ini.", "gagal");
         }
