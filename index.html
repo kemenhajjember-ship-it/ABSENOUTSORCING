@@ -3,481 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Absensi Outsourcing - Kemenhaj Jember</title>
-    <!-- Google Fonts untuk font resmi Simantri (Cinzel dan Montserrat) -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>E-Absensi Outsourcing Kemenhaj Jember</title>
     <!-- Library QR Code Scanner -->
     <script src="https://unpkg.com/html5-qrcode"></script>
-    
-  <style>
-        :root {
-            --primary-color: #2b1b0c; /* Cokelat Gelap Simantri */
-            --secondary-color: #d4a342; /* Gold/Emas Simantri */
-            --bg-color: #f7f3eb; /* Krem Lembut Background */
-            --text-color: #3e2723; /* Teks Cokelat Tua */
-            --success-color: #1b5e20;
-            --fail-color: #b71c1c;
-        }
-
-       * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            /* Font dasar web otomatis berubah jadi Montserrat yang bersih */
-            font-family: 'Montserrat', sans-serif;
-        }
-
-      body {
-    background-color: var(--bg-color);
-    /* Memanggil file gambar yang lo upload tadi */
-    background-image: url('bg.png'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Biar background-nya terkunci pas di-scroll */
-    color: var(--text-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-}
-
-        .container {
-            background: #ffffff;
-            width: 100%;
-            max-width: 450px;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(43, 27, 12, 0.08);
-            overflow: hidden;
-            border: 2px solid rgba(212, 163, 66, 0.3);
-        }
-
-        .header {
-    background: linear-gradient(135deg, #3a2510 0%, #2b1b0c 100%);
-    color: #ffffff;
-    text-align: center;
-    /* Kita naikin padding bawah dari 25px menjadi 40px biar melar kebawah */
-    padding: 15px 20px 40px 20px; 
-    border-bottom: 4px solid var(--secondary-color);
-}
-     .logo-kemenhaj {
-    width: 250px; /* Di-up ukurannya biar gak terlalu imut */
-    height: auto;
-    margin-bottom: -25px;
-    display: inline-block;
-}
-        .header h1 {
-            /* Font judul berubah jadi Cinzel yang ada kaki klasiknya */
-            font-family: 'Cinzel', serif;
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c221e;
             color: #ffffff;
-            margin-bottom: -1px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
         }
-
-        .header p {
-            font-size: 11px;
-            color: #d4a342;
-            font-weight: 600;
-            /* Mengatur jarak antar huruf agar renggang elegan mirip web temen lo */
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .container {
+            background-color: #3d312a;
+            border: 2px solid #d4af37;
+            border-radius: 15px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-
-        .content {
-            padding: 30px 24px;
-            background: #ffffff;
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
         }
-
-        .form-group {
-            margin-bottom: 25px;
+        .header img {
+            width: 80px;
         }
-
-        .form-group label {
-            display: block;
-            font-family: 'Cinzel', serif;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 8px;
-            text-transform: uppercase;
+        .header h2 {
+            font-size: 18px;
+            color: #d4af37;
+            margin: 10px 0 5px 0;
             letter-spacing: 1px;
         }
-
-        .form-group input {
+        .header p {
+            font-size: 12px;
+            margin: 0;
+            color: #cccccc;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #d4af37;
+        }
+        select, textarea {
             width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e2ece9;
-            background-color: #faf8f5;
-            border-radius: 12px;
-            font-size: 15px;
-            color: var(--text-color);
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--secondary-color);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #d4af37;
             background-color: #ffffff;
-            box-shadow: 0 0 0 4px rgba(212, 163, 66, 0.15);
+            color: #333333;
+            box-sizing: border-box;
+            font-size: 14px;
         }
-
-        .scanner-section {
-            border: 2px dashed #d4a342;
-            border-radius: 16px;
-            padding: 15px;
-            background: #fdfbf7;
-            text-align: center;
-            margin-bottom: 25px;
+        .radio-group {
+            background: #2c221e;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #555;
+            font-size: 13px;
         }
-
+        .radio-group label {
+            display: inline;
+            color: #fff;
+            margin-left: 5px;
+        }
         #reader {
             width: 100%;
-            border: none !important;
-            border-radius: 12px;
+            margin-top: 15px;
+            border-radius: 10px;
             overflow: hidden;
         }
-
-        /* Tombol Request Kamera bertema Gold */
-        #reader button {
-            background: linear-gradient(135deg, #e5b352 0%, #d4a342 100*) !important;
-            color: #2b1b0c !important;
-            border: none !important;
-            padding: 12px 24px !important;
-            font-size: 14px !important;
-            font-weight: 600 !important;
-            border-radius: 8px !important;
-            cursor: pointer !important;
-            box-shadow: 0 4px 12px rgba(212, 163, 66, 0.2) !important;
-            transition: all 0.2s !important;
-            margin-top: 10px !important;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        #reader button:hover {
-            background: #2b1b0c !important;
-            color: #ffffff !important;
-            box-shadow: 0 4px 12px rgba(43, 27, 12, 0.2) !important;
-        }
-
         #status {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
             display: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
             text-align: center;
-            line-height: 1.4;
-            animation: fadeInUp 0.3s ease;
+            font-weight: bold;
+            font-size: 13px;
         }
-
-        .sukses {
-            background-color: #e8f5e9;
-            color: var(--success-color);
-            border: 1px solid #c8e6c9;
-        }
-
-        .gagal {
-            background-color: #ffebee;
-            color: var(--fail-color);
-            border: 1px solid #ffcdd2;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 15px;
-            font-size: 11px;
-            color: #8d7d70;
-            background: #2b1b0c;
-            color: #eadecc;
-            border-top: 2px solid var(--secondary-color);
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .sukses { background-color: #d4edda; color: #155724; }
+        .gagal { background-color: #f8d7da; color: #721c24; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Bagian Atas / Kop Aplikasi -->
-        <div class="header">
-    <!-- Jika nama file yang lo upload tadi adalah logo.png -->
-<img src="kemenhajpremium.png.png" alt="Logo Kemenhaj" class="logo-kemenhaj">
-    <h1>E-ABSENSI OUTSOURCING</h1>
-    <p>Kemenhaj Kabupaten Jember</p>
-</div>
+<div class="container">
+    <div class="header">
+        <!-- Pastikan file logo.png ada di folder repository github lo -->
+        <img src="logo.png" alt="Logo Kemenhaj" onerror="this.style.display='none'">
+        <h2>E-ABSENSI OUTSOURCING</h2>
+        <p>KEMENHAJ KABUPATEN JEMBER</p>
+    </div>
 
-        <!-- Bagian Input & Kamera -->
-        <div class="content">
-          <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Absensi Outsourcing - Kemenhaj Jember</title>
-    <!-- Google Fonts untuk font resmi Simantri (Cinzel dan Montserrat) -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Library QR Code Scanner -->
-    <script src="https://unpkg.com/html5-qrcode"></script>
-    
-  <style>
-        :root {
-            --primary-color: #2b1b0c; /* Cokelat Gelap Simantri */
-            --secondary-color: #d4a342; /* Gold/Emas Simantri */
-            --bg-color: #f7f3eb; /* Krem Lembut Background */
-            --text-color: #3e2723; /* Teks Cokelat Tua */
-            --success-color: #1b5e20;
-            --fail-color: #b71c1c;
-        }
+    <!-- 1. Dropdown Nama Pegawai -->
+    <div class="form-group">
+        <label for="namaPegawai"><b>NAMA LENGKAP PEGAWAI</b></label>
+        <select id="namaPegawai">
+            <option value="">-- Pilih Nama Anda --</option>
+            <!-- Isi nama sementara, nanti bisa lo tambahin sesuai daftar asli -->
+            <option value="Ahmad Sukron">Ahmad Sukron</option>
+            <option value="Budi Santoso">Budi Santoso</option>
+            <option value="Ilmi">Ilmi</option>
+            <option value="Pegawai 4">Pegawai 4</option>
+        </select>
+    </div>
 
-       * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            /* Font dasar web otomatis berubah jadi Montserrat yang bersih */
-            font-family: 'Montserrat', sans-serif;
-        }
-
-      body {
-    background-color: var(--bg-color);
-    /* Memanggil file gambar yang lo upload tadi */
-    background-image: url('bg.png'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Biar background-nya terkunci pas di-scroll */
-    color: var(--text-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-}
-
-        .container {
-            background: #ffffff;
-            width: 100%;
-            max-width: 450px;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(43, 27, 12, 0.08);
-            overflow: hidden;
-            border: 2px solid rgba(212, 163, 66, 0.3);
-        }
-
-        .header {
-    background: linear-gradient(135deg, #3a2510 0%, #2b1b0c 100%);
-    color: #ffffff;
-    text-align: center;
-    /* Kita naikin padding bawah dari 25px menjadi 40px biar melar kebawah */
-    padding: 15px 20px 40px 20px; 
-    border-bottom: 4px solid var(--secondary-color);
-}
-     .logo-kemenhaj {
-    width: 250px; /* Di-up ukurannya biar gak terlalu imut */
-    height: auto;
-    margin-bottom: -25px;
-    display: inline-block;
-}
-        .header h1 {
-            /* Font judul berubah jadi Cinzel yang ada kaki klasiknya */
-            font-family: 'Cinzel', serif;
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            color: #ffffff;
-            margin-bottom: -1px;
-        }
-
-        .header p {
-            font-size: 11px;
-            color: #d4a342;
-            font-weight: 600;
-            /* Mengatur jarak antar huruf agar renggang elegan mirip web temen lo */
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .content {
-            padding: 30px 24px;
-            background: #ffffff;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            font-family: 'Cinzel', serif;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e2ece9;
-            background-color: #faf8f5;
-            border-radius: 12px;
-            font-size: 15px;
-            color: var(--text-color);
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            background-color: #ffffff;
-            box-shadow: 0 0 0 4px rgba(212, 163, 66, 0.15);
-        }
-
-        .scanner-section {
-            border: 2px dashed #d4a342;
-            border-radius: 16px;
-            padding: 15px;
-            background: #fdfbf7;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        #reader {
-            width: 100%;
-            border: none !important;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        /* Tombol Request Kamera bertema Gold */
-        #reader button {
-            background: linear-gradient(135deg, #e5b352 0%, #d4a342 100*) !important;
-            color: #2b1b0c !important;
-            border: none !important;
-            padding: 12px 24px !important;
-            font-size: 14px !important;
-            font-weight: 600 !important;
-            border-radius: 8px !important;
-            cursor: pointer !important;
-            box-shadow: 0 4px 12px rgba(212, 163, 66, 0.2) !important;
-            transition: all 0.2s !important;
-            margin-top: 10px !important;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        #reader button:hover {
-            background: #2b1b0c !important;
-            color: #ffffff !important;
-            box-shadow: 0 4px 12px rgba(43, 27, 12, 0.2) !important;
-        }
-
-        #status {
-            display: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            text-align: center;
-            line-height: 1.4;
-            animation: fadeInUp 0.3s ease;
-        }
-
-        .sukses {
-            background-color: #e8f5e9;
-            color: var(--success-color);
-            border: 1px solid #c8e6c9;
-        }
-
-        .gagal {
-            background-color: #ffebee;
-            color: var(--fail-color);
-            border: 1px solid #ffcdd2;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 15px;
-            font-size: 11px;
-            color: #8d7d70;
-            background: #2b1b0c;
-            color: #eadecc;
-            border-top: 2px solid var(--secondary-color);
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <!-- Bagian Atas / Kop Aplikasi -->
-        <div class="header">
-    <!-- Jika nama file yang lo upload tadi adalah logo.png -->
-<img src="kemenhajpremium.png.png" alt="Logo Kemenhaj" class="logo-kemenhaj">
-    <h1>E-ABSENSI OUTSOURCING</h1>
-    <p>Kemenhaj Kabupaten Jember</p>
-</div>
-
-        <!-- Bagian Input & Kamera -->
-        <div class="content">
-            <div class="form-group">
-                <label for="namaPegawai">Nama Lengkap Pegawai</label>
-                <input type="text" id="namaPegawai" placeholder="Masukkan nama Anda sesuai KTP..." autocomplete="off">
-            </div>
-
-            <div class="form-group">
-                <label>Scan QR Code Resmi Kantor</label>
-                <div class="scanner-section">
-                    <div id="reader"></div>
-                </div>
-            </div>
-
-            <!-- Tempat memunculkan notifikasi -->
-            <div id="status"></div>
-        </div>
-
-        <!-- Bagian Bawah -->
-        <div class="footer">
-            &copy; 2026 Kemenhaj Jember Ekosistem terintegrasi
+    <!-- 2. Opsi Absen / Izin -->
+    <div class="form-group">
+        <label><b>OPSI ABSENSI</b></label>
+        <div class="radio-group">
+            <input type="radio" id="modeHadir" name="modeAbsen" value="HADIR" checked onclick="toggleAlasan()">
+            <label for="modeHadir">Hadir (Scan Kantor)</label><br><br>
+            
+            <input type="radio" id="modeIzinTelat" name="modeAbsen" value="IZIN_TELAT" onclick="toggleAlasan()">
+            <label for="modeIzinTelat">Izin Datang Telat</label><br><br>
+            
+            <input type="radio" id="modeIzinAbsen" name="modeAbsen" value="IZIN_TIDAK_MASUK" onclick="toggleAlasan()">
+            <label for="modeIzinAbsen">Izin Tidak Masuk (Dari Rumah)</label>
         </div>
     </div>
 
-    <!-- Hubungkan ke script logika kita -->
-    <script src="script.js"></script>
-</body>
-</html>
-
-
-            <div class="form-group">
-                <label>Scan QR Code Resmi Kantor</label>
-                <div class="scanner-section">
-                    <div id="reader"></div>
-                </div>
-            </div>
-
-            <!-- Tempat memunculkan notifikasi -->
-            <div id="status"></div>
-        </div>
-
-        <!-- Bagian Bawah -->
-        <div class="footer">
-            &copy; 2026 Kemenhaj Jember Ekosistem terintegrasi
-        </div>
+    <!-- 3. Kotak Alasan Opsional (Muncul kalau pilih Izin) -->
+    <div class="form-group" id="boxAlasan" style="display: none;">
+        <label for="alasan"><b>ALASAN IZIN (OPSIONAL)</b></label>
+        <textarea id="alasan" rows="2" placeholder="Contoh: Ban bocor / Sakit flu..."></textarea>
     </div>
 
-    <!-- Hubungkan ke script logika kita -->
-    <script src="script.js"></script>
+    <!-- 4. Area Scanner QR -->
+    <label style="text-align: center; margin-top: 15px;"><b>SCAN QR CODE RESMI KANTOR</b></label>
+    <div id="reader"></div>
+
+    <!-- 5. Notifikasi Status -->
+    <div id="status"></div>
+</div>
+
+<script>
+    function toggleAlasan() {
+        const isHadir = document.getElementById("modeHadir").checked;
+        document.getElementById("boxAlasan").style.display = isHadir ? "none" : "block";
+    }
+</script>
+
+<!-- Script Logika Absensi -->
+<script src="script.js"></script>
 </body>
 </html>
