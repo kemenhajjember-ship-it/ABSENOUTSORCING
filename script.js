@@ -6,7 +6,7 @@ const URL_WEB_APP = "https://script.google.com/macros/s/AKfycby2uoA04qwcy254JqtX
 // Koordinat Target (Ganti dengan koordinat lo saat ini)
 const OFFICE_LAT = -8.1772228; // Jalur Latitude lama lo
 const OFFICE_LON = 113.7004709; // Jalur Longitude lama lo
-const MAX_DISTANCE = 50; // Jarak toleransi dalam meter (misal 50 meter)
+const MAX_DISTANCE = 100; // Jarak toleransi dalam meter (misal 50 meter)
 // Inisialisasi Kamera Scanner
 
 const html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
