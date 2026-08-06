@@ -49,8 +49,8 @@ function onScanSuccess(decodedText) {
     const skrg = new Date();
     const jamDecimal = skrg.getHours() + (skrg.getMinutes() / 60);
 
-    if (jamDecimal < 7.5) { // Sebelum 07:30
-        tampilkanStatus("Absen Kedatangan Belum Dibuka! (Buka jam 07:30)", "gagal");
+   if (jamDecimal < 5.0) { // Sebelum 05:00
+        tampilkanStatus("Absen Kedatangan Belum Dibuka! (Buka jam 05:00)", "gagal");
         return;
     }
 
