@@ -246,7 +246,9 @@
   <label for="alasan"><b>Alasan Izin (Opsional):</b></label>
   <textarea id="alasan" rows="2" style="width: 100%; padding: 8px;" placeholder="Tuliskan alasan jika ada..."></textarea>
 </div>
-
+<button type="button" onclick="kirimIzin()" style="margin-top: 10px; width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+  Kirim Izin (Tanpa Scan Barcode)
+</button>
 <script>
   function toggleAlasan() {
     const isHadir = document.getElementById("modeHadir").checked;
