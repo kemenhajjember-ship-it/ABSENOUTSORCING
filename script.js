@@ -6,23 +6,48 @@ const MAX_DISTANCE = 50;
 const html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
 html5QrcodeScanner.render(onScanSuccess);
 
-// Fitur Suara Perempuan
-function bicara(teks) {
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(teks);
-        utterance.lang = 'id-ID';
-        utterance.rate = 0.9;
-        
-        let voices = window.speechSynthesis.getVoices();
-        let femaleVoice = voices.find(v => v.lang.includes('id') && (v.name.includes('Indonesian') || v.name.includes('Gadis') || v.name.includes('Google') || v.name.includes('Natural')));
-        if (femaleVoice) utterance.voice = femaleVoice;
-        
-        window.speechSynthesis.speak(utterance);
+// Fungsi khusus untuk Kirim Izin Tanpa Scan Barcode
+function kirimIzin() {
+    const nama = document.getElementById("namaPegawai").value;
+    const mode = document.querySelector('input[name="modeAbsen"]:checked')?.value;
+    const alasan = document.getElementById("alasan").value.trim();
+
+    // Cek Hari Libur (Sabtu = 6, Minggu = 0)
+    const skrg = new Date();
+    const hari = skrg.getDay(); 
+    if (hari === 0 || hari === 6) {
+        tampilkanStatus("Absensi Ditolak: Sistem tidak dapat diakses pada hari Sabtu dan Minggu.", "gagal");
+        return;
     }
+
+    if (!nama) {
+        tampilkanStatus("Gagal: Pilih Nama Anda terlebih dahulu!", "gagal");
+        return;
+    }
+
+    if (mode !== "IZIN_TIDAK_MASUK") {
+        tampilkanStatus("Gagal: Pilih opsi 'Izin Tidak Masuk' untuk mengirim izin.", "gagal");
+        return;
+    }
+
+    if (!alasan) {
+        tampilkanStatus("Gagal: Wajib mengisi alasan tidak masuk!", "gagal");
+        return;
+    }
+
+    prosesKirim(nama, "IZIN TIDAK MASUK", "IZIN TIDAK MASUK", alasan, 0);
 }
 
 function onScanSuccess(decodedText) {
+    const skrg = new Date();
+    const hari = skrg.getDay(); 
+
+    // Blokir Akses Sabtu (6) dan Minggu (0)
+    if (hari === 0 || hari === 6) {
+        tampilkanStatus("Absensi Ditolak: Hari Sabtu dan Minggu sistem libur.", "gagal");
+        return;
+    }
+
     if (decodedText.trim() !== "KEMENHAJ-JEMBER") {
         tampilkanStatus("QR Code Salah! Bukan QR Resmi Kantor.", "gagal");
         return;
@@ -34,26 +59,23 @@ function onScanSuccess(decodedText) {
         return;
     }
 
-    const mode = document.querySelector('input[name="modeAbsen"]:checked').value;
+    const mode = document.querySelector('input[name="modeAbsen"]:checked')?.value;
     const alasan = document.getElementById("alasan").value.trim();
 
-    html5QrcodeScanner.clear();
-
-    // Mode Izin Tidak Masuk -> Bypass GPS
     if (mode === "IZIN_TIDAK_MASUK") {
-        prosesKirim(nama, "IZIN TIDAK MASUK", "IZIN TIDAK MASUK", alasan, 0);
+        tampilkanStatus("Untuk 'Izin Tidak Masuk', klik tombol 'Kirim Izin' tanpa scan QR.", "gagal");
         return;
     }
 
-    // Pengecekan Jam Buka Absen (Masuk 08.30, Buka 07.30 | Pulang 16.30, Buka 16.00)
-    const skrg = new Date();
     const jamDecimal = skrg.getHours() + (skrg.getMinutes() / 60);
 
-   if (jamDecimal < 5.0) { // Sebelum 05:00
-        tampilkanStatus("Absen Kedatangan Belum Dibuka! (Buka jam 05:00)", "gagal");
+    // Pengecekan Jam Buka Absen: Masuk (05.00 - 15.00) | Pulang (16.00 - 24.00)
+    if (jamDecimal < 5.0 || (jamDecimal >= 15.0 && jamDecimal < 16.0)) {
+        tampilkanStatus("Absensi Ditutup! Jam Masuk (05:00 - 15:00) & Jam Pulang (16:00 - 24:00).", "gagal");
         return;
     }
 
+    html5QrcodeScanner.clear();
     tampilkanStatus("QR Valid! Memeriksa Lokasi GPS...", "sukses");
 
     if (navigator.geolocation) {
@@ -78,19 +100,18 @@ function verifikasiGPSDanKirim(pos, nama, mode, alasan, jamDecimal) {
     let tipe = "";
     let ket = "";
 
-    // Tentukan Masuk vs Pulang berdasarkan jam
-    if (jamDecimal < 16.0) { // Kedatangan
+    if (jamDecimal >= 5.0 && jamDecimal < 15.0) { // Sesi Kedatangan
         tipe = "MASUK";
         if (mode === "IZIN_TELAT") {
             ket = "IZIN TELAT";
-        } else if (jamDecimal <= 8.5) { // 08:30
+        } else if (jamDecimal <= 8.5) { // Toleransi s/d 08:30
             ket = "TEPAT WAKTU";
         } else {
             ket = "TELAT";
         }
-    } else { // Kepulangan (setelah 16:00)
+    } else if (jamDecimal >= 16.0) { // Sesi Kepulangan
         tipe = "PULANG";
-        if (jamDecimal > 16.5) { // Lewat 16:30
+        if (jamDecimal > 16.5) {
             ket = "LEMBUR";
         } else {
             ket = "PULANG NORMAL";
@@ -110,14 +131,6 @@ function prosesKirim(nama, tipe, ket, alasan, jarak) {
         body: JSON.stringify(payload)
     })
     .then(() => {
-        let msgAudio = "";
-        if (tipe === "MASUK" || tipe === "IZIN TELAT" || tipe === "IZIN TIDAK MASUK") {
-            msgAudio = "absen sukses, semoga harimu lancar, amin yarobbal alamin";
-        } else {
-            msgAudio = "terima kasih kerja sama nya, semoga pekerjaan hari ini berkah, amin yarobbal alamin";
-        }
-        
-        bicara(msgAudio);
         tampilkanStatus(`Absen Berhasil Disimpan! (${ket})`, "sukses");
     })
     .catch(() => tampilkanStatus("Gagal terhubung ke database.", "gagal"));
