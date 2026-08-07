@@ -231,14 +231,14 @@
 <!-- Opsi Opsi Jenis Absen -->
 <div class="form-group" style="margin-top: 15px;">
   <label><b>Opsi Absen / Izin:</b></label><br>
-  <input type="radio" id="modeHadir" name="modeAbsen" value="HADIR" checked onclick="toggleAlasan()">
-  <label for="modeHadir">Hadir (Scan di Kantor)</label><br>
-  
-  <input type="radio" id="modeIzinTelat" name="modeAbsen" value="IZIN_TELAT" onclick="toggleAlasan()">
-  <label for="modeIzinTelat">Izin Datang Telat</label><br>
-  
-  <input type="radio" id="modeIzinAbsen" name="modeAbsen" value="IZIN_TIDAK_MASUK" onclick="toggleAlasan()">
-  <label for="modeIzinAbsen">Izin Tidak Masuk (Bisa dari Rumah)</label>
+  <input type="radio" id="modeHadir" name="modeAbsen" value="HADIR" checked onclick="toggleAlasan()" style="accent-color: #d4af37;">
+<label for="modeHadir">Hadir (Scan di Kantor)</label><br>
+
+<input type="radio" id="modeIzinTelat" name="modeAbsen" value="IZIN_TELAT" onclick="toggleAlasan()" style="accent-color: #d4af37;">
+<label for="modeIzinTelat">Izin Datang Telat</label><br>
+
+<input type="radio" id="modeIzinAbsen" name="modeAbsen" value="IZIN_TIDAK_MASUK" onclick="toggleAlasan()" style="accent-color: #d4af37;">
+<label for="modeIzinAbsen">Izin Tidak Masuk (Bisa dari Rumah)</label>
 </div>
 
 <!-- Kotak Alasan Opsional -->
@@ -246,7 +246,8 @@
   <label for="alasan"><b>Alasan Izin (Opsional):</b></label>
   <textarea id="alasan" rows="2" style="width: 100%; padding: 8px;" placeholder="Tuliskan alasan jika ada..."></textarea>
 </div>
-<button type="button" onclick="kirimIzin()" style="margin-top: 10px; width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+
+<button type="button" onclick="kirimIzin()" style="margin-top: 10px; width: 100%; padding: 12px; background-color: #d4af37; color: #1a1a1a; font-weight: bold; border: none; border-radius: 5px; cursor: pointer;">
   Kirim Izin (Tanpa Scan Barcode)
 </button>
 <script>
