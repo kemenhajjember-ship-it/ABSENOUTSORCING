@@ -230,15 +230,22 @@
 
 <!-- Opsi Opsi Jenis Absen -->
 <div class="form-group" style="margin-top: 15px;">
-  <label><b>Opsi Absen / Izin:</b></label><br>
-  <input type="radio" id="modeHadir" name="modeAbsen" value="HADIR" checked onclick="toggleAlasan()" style="accent-color: #d4af37;">
-<label for="modeHadir">Hadir (Scan di Kantor)</label><br>
+  <label style="display: block; margin-bottom: 10px;"><b>Opsi Absen / Izin:</b></label>
 
-<input type="radio" id="modeIzinTelat" name="modeAbsen" value="IZIN_TELAT" onclick="toggleAlasan()" style="accent-color: #d4af37;">
-<label for="modeIzinTelat">Izin Datang Telat</label><br>
+  <label for="modeHadir" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; cursor: pointer;">
+    <span>Hadir (Scan di Kantor)</span>
+    <input type="radio" id="modeHadir" name="modeAbsen" value="HADIR" checked onclick="toggleAlasan()" style="accent-color: #d4af37; margin: 0;">
+  </label>
 
-<input type="radio" id="modeIzinAbsen" name="modeAbsen" value="IZIN_TIDAK_MASUK" onclick="toggleAlasan()" style="accent-color: #d4af37;">
-<label for="modeIzinAbsen">Izin Tidak Masuk (Bisa dari Rumah)</label>
+  <label for="modeIzinTelat" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; cursor: pointer;">
+    <span>Izin Datang Telat</span>
+    <input type="radio" id="modeIzinTelat" name="modeAbsen" value="IZIN_TELAT" onclick="toggleAlasan()" style="accent-color: #d4af37; margin: 0;">
+  </label>
+
+  <label for="modeIzinAbsen" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; cursor: pointer;">
+    <span>Izin Tidak Masuk (Bisa dari Rumah)</span>
+    <input type="radio" id="modeIzinAbsen" name="modeAbsen" value="IZIN_TIDAK_MASUK" onclick="toggleAlasan()" style="accent-color: #d4af37; margin: 0;">
+  </label>
 </div>
 
 <!-- Kotak Alasan Opsional -->
