@@ -229,17 +229,24 @@
 </div>
 
 <!-- Opsi Opsi Jenis Absen -->
-<div class="form-group" style="margin-top: 15px;">
-  <label style="display: block; margin-bottom: 10px;"><b>Opsi Absen / Izin:</b></label>
+<div class="form-group" style="margin-top: 15px; width: 100%;">
+  <label style="display: block; margin-bottom: 12px;"><b>OPSI ABSEN / IZIN:</b></label>
 
-  <label for="modeHadir" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; cursor: pointer;">
-    <span>Hadir (Scan di Kantor)</span>
-    <input type="radio" id="modeHadir" name="modeAbsen" value="HADIR" checked onclick="toggleAlasan()" style="accent-color: #d4af37; margin: 0;">
+  <label for="modeHadir" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 12px; cursor: pointer;">
+    <span>HADIR (SCAN DI KANTOR)</span>
+    <input type="radio" id="modeHadir" name="modeAbsen" value="HADIR" checked onclick="toggleAlasan()" style="accent-color: #d4af37; margin: 0; transform: scale(1.2);">
   </label>
 
-  <label for="modeIzinTelat" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; cursor: pointer;">
-    <span>Izin Datang Telat</span>
-    <input type="radio" id="modeIzinTelat" name="modeAbsen" value="IZIN_TELAT" onclick="toggleAlasan()" style="accent-color: #d4af37; margin: 0;">
+  <label for="modeIzinTelat" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 12px; cursor: pointer;">
+    <span>IZIN DATANG TELAT</span>
+    <input type="radio" id="modeIzinTelat" name="modeAbsen" value="IZIN_TELAT" onclick="toggleAlasan()" style="accent-color: #d4af37; margin: 0; transform: scale(1.2);">
+  </label>
+
+  <label for="modeIzinAbsen" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 12px; cursor: pointer;">
+    <span>IZIN TIDAK MASUK (BISA DARI RUMAH)</span>
+    <input type="radio" id="modeIzinAbsen" name="modeAbsen" value="IZIN_TIDAK_MASUK" onclick="toggleAlasan()" style="accent-color: #d4af37; margin: 0; transform: scale(1.2);">
+  </label>
+</div>
   </label>
 
   <label for="modeIzinAbsen" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; cursor: pointer;">
